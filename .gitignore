@@ -10,4 +10,4 @@ out/
 # Dotenv file
 .env
 .idea
-script/
+script/*.sh

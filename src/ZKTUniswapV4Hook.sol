@@ -9,11 +9,13 @@ import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 
 contract ZKTUniswapV4Hook is BaseHook, ComplianceAggregator  {
 
+    uint256 beforeSwapCounter;
+
     constructor(address _registryStub, IPoolManager _poolManager)
         BaseHook(_poolManager)
         ComplianceAggregator(_registryStub)
     {
-
+        beforeSwapCounter = 0;
     }
 
     function getHookPermissions() public pure override returns (Hooks.Permissions memory) {
@@ -37,7 +39,7 @@ contract ZKTUniswapV4Hook is BaseHook, ComplianceAggregator  {
         ExcludeBlacklistAction
         returns (bytes4)
     {
+        beforeSwapCounter += 1;
         return BaseHook.beforeSwap.selector;
     }
-
 }

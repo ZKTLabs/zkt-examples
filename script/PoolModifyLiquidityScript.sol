@@ -44,6 +44,6 @@ contract PoolModifyLiquidityScript is Script {
         vm.broadcast();
         IERC20(token1).approve(address(router), type(uint256).max);
         vm.broadcast();
-        router.modifyLiquidity(pool, IPoolManager.ModifyLiquidityParams(-120, 120, 100e18), hookData);
+        router.modifyLiquidity(pool, IPoolManager.ModifyLiquidityParams(-120, 120, 100000e18), hookData);
     }
 }

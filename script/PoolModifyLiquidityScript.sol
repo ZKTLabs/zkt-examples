@@ -28,23 +28,22 @@ contract PoolModifyLiquidityScript is Script {
         address token1 = uint160(TOKENA) < uint160(TOKENB) ? TOKENB : TOKENA;
 
         int24 tickSpacing = 60;
-        /// floor(sqrt(1) * 2 ^ 96)  == 1
         bytes memory hookData = new bytes(0);
 
         PoolKey memory pool = PoolKey({
             currency0: Currency.wrap(token0),
             currency1: Currency.wrap(token1),
-            fee: 3000,
+            fee: 50000,
             tickSpacing: tickSpacing,
             hooks: IHooks(HOOK_ADDRESS)
         });
 
         // add liquidity
-        vm.broadcast();
-        IERC20(token0).approve(address(router), type(uint256).max);
+//        vm.broadcast();
+//        IERC20(token0).approve(address(router), type(uint256).max);
         vm.broadcast();
         IERC20(token1).approve(address(router), type(uint256).max);
         vm.broadcast();
-        router.modifyLiquidity(pool, IPoolManager.ModifyLiquidityParams(-120, 120, 100000e18), hookData);
+        router.modifyLiquidity{value: 1 ether}(pool, IPoolManager.ModifyLiquidityParams(108180, 108240, 100000e18), hookData);
     }
 }

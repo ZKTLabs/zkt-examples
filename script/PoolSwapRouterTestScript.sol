@@ -5,6 +5,7 @@ import {IERC20} from "forge-std/interfaces/IERC20.sol";
 import {Script} from "forge-std/Script.sol";
 import {console} from "forge-std/console.sol";
 import {Hooks} from "v4-core/src/libraries/Hooks.sol";
+import {TickMath} from "v4-core/src/libraries/TickMath.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolSwapTest} from "v4-core/src/test/PoolSwapTest.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
@@ -37,15 +38,15 @@ contract PoolSwapRouterTestScript is Script {
         PoolKey memory key = PoolKey({
             currency0: Currency.wrap(token0),
             currency1: Currency.wrap(token1),
-            fee: 3000,
+            fee: 50000,
             tickSpacing: tickSpacing,
             hooks: IHooks(HOOK_ADDRESS)
         });
 
         IPoolManager.SwapParams memory params = IPoolManager.SwapParams({
             zeroForOne: true,
-            amountSpecified: 0.1 ether,
-            sqrtPriceLimitX96: 7922816251426433759354395033
+            amountSpecified: 200 ether,
+            sqrtPriceLimitX96: 17715778550986650090239814974724
         });
 
         PoolSwapTest.TestSettings memory testSettings =
@@ -56,6 +57,6 @@ contract PoolSwapRouterTestScript is Script {
         vm.broadcast();
         IERC20(token1).approve(address(router), type(uint256).max);
         vm.broadcast();
-        router.swap{value: 0.1 ether}(key, params, testSettings, hookData);
+        router.swap{value:  0.01 ether}(key, params, testSettings, hookData);
     }
 }

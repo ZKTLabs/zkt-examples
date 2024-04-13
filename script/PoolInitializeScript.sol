@@ -29,13 +29,16 @@ contract PoolInitializeScript is Script {
 
         int24 tickSpacing = 60;
         /// floor(sqrt(1) * 2 ^ 96)  == 1
-        uint160 initializePrice = 79228162514264337593543950336;
+//        uint160 initializePrice = 79228162514264337593543950336;
+        /// floor(sqrt(50000 / 1) * 2 ^ 96)
+        uint160 initializePrice = 17715955711429571029610171616072;
+//        uint160 initializePrice = 5602277097478614198912276234240;
         bytes memory hookData = new bytes(0);
 
         PoolKey memory pool = PoolKey({
             currency0: Currency.wrap(token0),
             currency1: Currency.wrap(token1),
-            fee: 3000,
+            fee: 50000,
             tickSpacing: tickSpacing,
             hooks: IHooks(HOOK_ADDRESS)
         });

@@ -46,7 +46,7 @@ contract PoolSwapRouterTestScript is Script {
         IPoolManager.SwapParams memory params = IPoolManager.SwapParams({
             zeroForOne: true,
             amountSpecified: 200 ether,
-            sqrtPriceLimitX96: 17715778550986650090239814974724
+            sqrtPriceLimitX96: TickMath.MIN_SQRT_RATIO * 100
         });
 
         PoolSwapTest.TestSettings memory testSettings =

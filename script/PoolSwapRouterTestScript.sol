@@ -16,7 +16,7 @@ contract PoolSwapRouterTestScript is Script {
     using PoolIdLibrary for PoolKey;
 
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
-    address constant TOKENA = address(0x520A3474beAaE4AC406242aa74eF6D052dE8aaED);
+    address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
     address constant HOOK_ADDRESS = address(0x020951DEDa6928a0Eb297ed5e6a4132A01d800DD);
     address constant POOL_SWAP = address(0x92d3117268Bd580a748acbEE73162834443a3A17);
@@ -51,11 +51,11 @@ contract PoolSwapRouterTestScript is Script {
         PoolSwapTest.TestSettings memory testSettings =
                             PoolSwapTest.TestSettings({withdrawTokens: true, settleUsingTransfer: true, currencyAlreadySent: false});
 
-        vm.broadcast();
-        IERC20(token0).approve(address(router), type(uint256).max);
+//        vm.broadcast();
+//        IERC20(token0).approve(address(router), type(uint256).max);
         vm.broadcast();
         IERC20(token1).approve(address(router), type(uint256).max);
         vm.broadcast();
-        router.swap(key, params, testSettings, hookData);
+        router.swap{value: 0.1 ether}(key, params, testSettings, hookData);
     }
 }

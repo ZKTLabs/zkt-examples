@@ -16,7 +16,7 @@ contract PoolSwapRouterInitScript is Script {
     using PoolIdLibrary for PoolKey;
 
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
-    address constant TOKENA = address(0x520A3474beAaE4AC406242aa74eF6D052dE8aaED);
+    address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
     address constant HOOK_ADDRESS = address(0x020951DEDa6928a0Eb297ed5e6a4132A01d800DD);
 

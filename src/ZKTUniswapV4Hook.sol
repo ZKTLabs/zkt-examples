@@ -9,7 +9,7 @@ import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 
 contract ZKTUniswapV4Hook is BaseHook, ComplianceAggregator  {
 
-    uint256 beforeSwapCounter;
+    uint256 public beforeSwapCounter;
 
     constructor(address _registryStub, IPoolManager _poolManager)
         BaseHook(_poolManager)

@@ -16,7 +16,7 @@ contract PoolInitializeScript is Script {
 //    address constant TOKENA = address(0x520A3474beAaE4AC406242aa74eF6D052dE8aaED);
     address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
-    address constant HOOK_ADDRESS = address(0x0207B8639F1A628d2D81075Bfaf0a846050eE9A0);
+    address constant HOOK_ADDRESS = address(0x0204604aEF0B2225E273b07010ed7Fb72b2B7CcF);
 
     IPoolManager manager = IPoolManager(POOL_MANAGER);
 

@@ -16,7 +16,7 @@ contract PoolModifyLiquidityScript is Script {
 //    address constant TOKENA = address(0x520A3474beAaE4AC406242aa74eF6D052dE8aaED);
     address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
-    address constant HOOK_ADDRESS = address(0x020fC94ec2D962B686b84091bf44A15F6b1852a4);
+    address constant HOOK_ADDRESS = address(0x02065706eD6Ce5bff1537D67bb7995131aE9ef4a);
 
     PoolModifyLiquidityTest router = PoolModifyLiquidityTest(0x49e9cC8160410a9D8Be588f2fC9F7642e4e6E995);
 

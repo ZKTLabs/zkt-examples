@@ -19,7 +19,7 @@ contract PoolSwapRouterTestScript is Script {
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
     address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
-    address constant HOOK_ADDRESS = address(0x020fC94ec2D962B686b84091bf44A15F6b1852a4);
+    address constant HOOK_ADDRESS = address(0x02065706eD6Ce5bff1537D67bb7995131aE9ef4a);
     address constant POOL_SWAP = address(0x92d3117268Bd580a748acbEE73162834443a3A17);
 
     PoolSwapTest router = PoolSwapTest(address(POOL_SWAP));

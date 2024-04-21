@@ -10,7 +10,7 @@ import {ZKTUniswapV4Hook} from "../src/ZKTUniswapV4Hook.sol";
 contract ZKTUniswapV4HookScript is Script {
     address constant CREATE2_DEPLOYER = address(0x4e59b44847b379578588920cA78FbF26c0B4956C);
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
-    address constant COMPLIANCE_REGISTRY_STUB = address(0x63FceB2A96029eFdA6446eBCE4f24edF00C158E2);
+    address constant COMPLIANCE_REGISTRY_STUB = address(0x73656B5EdAb606a090c171649bC36eA5C406332C);
 
     address HOOK_ADDRESS;
     bytes32 SALT;

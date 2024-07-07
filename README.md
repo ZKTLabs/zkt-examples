@@ -6,6 +6,16 @@
 forge install ZKTLabs/zktnetwork --no-commit
 ``` 
 
+## Usage
+
+1. import `ComplianceAggregator` from `@zktnetwork/v0.2/abstract/ComplianceAggregator.sol`
+
+2. Inherit `ComplianceAggregator` in your contract
+
+3. Use the `ExcludeBlacklistAction` or `onlyWhitelistAction` modifier to restrict the access to the function
+
+
+
 ## Basic Example
 
 [Counter.sol](./src/Counter.sol)

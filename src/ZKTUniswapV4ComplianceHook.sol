@@ -61,10 +61,11 @@ contract ZKTUniswapV4ComplianceHook is BaseHook, ComplianceAggregatorV2 {
                 ) = stub.getData(subData, false);
             */
             (
-                ,
+                address _party,
                 ,
                 uint256 _score,
             ) = stub.getData(encodedData, true);
+            require(msg.sender == _party, "ZKTUniswapV4ComplianceHook: Invalid party");
             require(_score > validScore, "ZKTUniswapV4ComplianceHook: Invalid score");
             beforeSwapCounter += 1;
             return BaseHook.beforeSwap.selector;

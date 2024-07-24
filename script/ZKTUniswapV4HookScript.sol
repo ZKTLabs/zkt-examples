@@ -2,8 +2,11 @@
 pragma solidity ^0.8.4;
 
 import {Script} from "forge-std/Script.sol";
-import {Hooks} from "v4-core/src/libraries/Hooks.sol";
-import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
+import {IERC20} from "forge-std/interfaces/IERC20.sol";
+import "v4-core/libraries/Hooks.sol";
+import {Script} from "forge-std/Script.sol";
+import "v4-core/interfaces/IPoolManager.sol";
+import {PoolModifyLiquidityTest} from "v4-core/test/PoolModifyLiquidityTest.sol";
 import {HookMiner} from "./HookMiner.sol";
 import {ZKTUniswapV4Hook} from "../src/ZKTUniswapV4Hook.sol";
 

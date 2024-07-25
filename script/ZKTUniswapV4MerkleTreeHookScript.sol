@@ -15,6 +15,7 @@ import {ZKTUniswapV4ComplianceHook} from "../src/ZKTUniswapV4ComplianceHook.sol"
 contract ZKTUniswapV4MerkleTreeHookScript is Script {
     address constant CREATE2_DEPLOYER = address(0x4e59b44847b379578588920cA78FbF26c0B4956C);
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
+    // our compliance stub address
     address constant COMPLIANCE_STUB = address(0xAd6a548adF382324fbeFC29d88A7668c9C67EaE7);
 
     address HOOK_ADDRESS;

@@ -11,17 +11,20 @@ contract ZKTUniswapV4ComplianceHook is BaseHook, ComplianceAggregatorV2 {
 
         uint256 public beforeSwapCounter;
         uint256 public validScore;
+        bool public bypass;
 
         constructor(
             address _versionedMerkleTreeStub,
             IPoolManager _poolManager,
-            uint256 _validScore
+            uint256 _validScore,
+            bool _bypass
         )
             BaseHook(_poolManager)
             ComplianceAggregatorV2(_versionedMerkleTreeStub)
         {
             beforeSwapCounter = 0;
             validScore = _validScore;
+            bypass = _bypass;
         }
 
         function getHookPermissions() public pure virtual override returns (Hooks.Permissions memory) {
@@ -50,29 +53,11 @@ contract ZKTUniswapV4ComplianceHook is BaseHook, ComplianceAggregatorV2 {
                 bytes memory encodedData
             ) = abi.decode(data, (bytes32[], bytes));
             require(stub.verify(proof, encodedData), "ZKTUniswapV4ComplianceHook: Invalid proof");
-            /*
-                /// @dev Get data from encodedData but with root
-                (bytes32 root, bytes memory subData) = stub.getRoot(encodedData);
-                (
-                    address party,
-                    uint256 label,
-                    uint256 score,
-                    uint256 version
-                ) = stub.getData(subData, false);
-            */
-            (
-                ,
-                ,
-                uint256 _score,
-            ) = stub.getData(encodedData, true);
-//            string memory message =string(abi.encodePacked(
-//                "ZKTUniswapV4ComplianceHook: Invalid party: ",
-//                tx.origin.toString(),
-//                ", ",
-//                _party.toString()
-//            ));
-//            require(tx.origin == _party, message); // tx.origin can not be pass by vm.cheatcode
-            require(_score > validScore, "ZKTUniswapV4ComplianceHook: Invalid score");
+
+            if (!bypass) {
+                require(tx.origin == stub.getAccount(encodedData, true), "ZKTUniswapV4ComplianceHook: Invalid account");
+            }
+            require(stub.getScore(encodedData, true) > validScore, "ZKTUniswapV4ComplianceHook: Invalid score");
             beforeSwapCounter += 1;
             return BaseHook.beforeSwap.selector;
         }

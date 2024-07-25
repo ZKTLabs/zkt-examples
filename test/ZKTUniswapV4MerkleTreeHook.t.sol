@@ -43,7 +43,7 @@ contract ZKTUniswapV4MerkleTreeHookTest is Test {
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
     address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
-    address constant HOOK_ADDRESS = address(0x0208b4e996d262d6E09437d8D4526f17970D3637);
+    address constant HOOK_ADDRESS = address(0x020c5318be80A8efAe13aE50C727ADc2FB00b220);
     address constant POOL_SWAP = address(0x92d3117268Bd580a748acbEE73162834443a3A17);
     bytes32 merkleRoot = bytes32(uint256(0x3945ad0e6c226783f821a36cd03582fb50527eb03076c4a8ef696bdb21b80517));
 
@@ -150,7 +150,7 @@ contract ZKTUniswapV4MerkleTreeHookTest is Test {
         bytes memory encodedData = abi.encode(merkleRoot, subEncodedData);
         console2.logBytes(encodedData);
 
-        IComplianceVersionedMerkleTreeStub stub = IComplianceVersionedMerkleTreeStub(0xAd6a548adF382324fbeFC29d88A7668c9C67EaE7);
+        IComplianceVersionedMerkleTreeStub stub = IComplianceVersionedMerkleTreeStub(0x0732325cC6ba056Af5c95133979d6f748DB4dC35);
         assertEq(stub.verify(proof, encodedData), true, "Verify should be true");
     }
 }

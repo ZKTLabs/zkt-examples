@@ -16,7 +16,7 @@ contract ZKTUniswapV4MerkleTreeHookScript is Script {
     address constant CREATE2_DEPLOYER = address(0x4e59b44847b379578588920cA78FbF26c0B4956C);
     address constant POOL_MANAGER = address(0x33F048ADeCbBD8608436eF31a09db8001149404B);
     // our compliance stub address
-    address constant COMPLIANCE_STUB = address(0xAd6a548adF382324fbeFC29d88A7668c9C67EaE7);
+    address constant COMPLIANCE_STUB = address(0x0732325cC6ba056Af5c95133979d6f748DB4dC35);
 
     address HOOK_ADDRESS;
     bytes32 SALT;
@@ -27,7 +27,7 @@ contract ZKTUniswapV4MerkleTreeHookScript is Script {
             CREATE2_DEPLOYER,
             flags,
             type(ZKTUniswapV4ComplianceHook).creationCode,
-            abi.encode(address(COMPLIANCE_STUB), address(POOL_MANAGER), uint256(60))
+            abi.encode(address(COMPLIANCE_STUB), address(POOL_MANAGER), uint256(60), true)
         );
         HOOK_ADDRESS = hookAddress;
         SALT = salt;
@@ -36,7 +36,7 @@ contract ZKTUniswapV4MerkleTreeHookScript is Script {
     function run() public {
         vm.broadcast();
         uint256 validScore = 60;
-        ZKTUniswapV4ComplianceHook zkt = new ZKTUniswapV4ComplianceHook{salt: SALT}(address(COMPLIANCE_STUB), IPoolManager(address(POOL_MANAGER)), validScore);
+        ZKTUniswapV4ComplianceHook zkt = new ZKTUniswapV4ComplianceHook{salt: SALT}(address(COMPLIANCE_STUB), IPoolManager(address(POOL_MANAGER)), validScore, true);
         require(address(zkt) == HOOK_ADDRESS, "ZKTUniswapV4ComplianceHook: hook address mismatch");
     }
 }
@@ -44,9 +44,7 @@ contract ZKTUniswapV4MerkleTreeHookScript is Script {
 contract ZKTUniswapV4MerkleTreeHookPoolScript is Script {
 
     address constant CREATE2_DEPLOYER = address(0x4e59b44847b379578588920cA78FbF26c0B4956C);
-//    address constant HOOK_ADDRESS = address(0x020694883742262E0b6b6601857412fE939b18B8);
-//    address constant HOOK_ADDRESS = address(0x02075310C86150Cb92819E4F2AA30D747D98a347);
-    address constant HOOK_ADDRESS = address(0x0208b4e996d262d6E09437d8D4526f17970D3637);
+    address constant HOOK_ADDRESS = address(0x020c5318be80A8efAe13aE50C727ADc2FB00b220);
     address constant TOKENA = Currency.unwrap(CurrencyLibrary.NATIVE);
     address constant TOKENB = address(0x6BCCF17873Fe200962451E6824090b847DB1ACEb);
 
@@ -104,7 +102,7 @@ contract ZKTUniswapV4MerkleTreeHookPoolScript is Script {
 //        IERC20(token0).approve(address(router), type(uint256).max);
         vm.startBroadcast(deployerPrivateKey);
         IERC20(token1).approve(address(router), type(uint256).max);
-        router.modifyLiquidity{value: 1 ether}(pool, IPoolManager.ModifyLiquidityParams(108180, 108240, 100000e18), hookData);
+        router.modifyLiquidity{value: 0.1 ether}(pool, IPoolManager.ModifyLiquidityParams(108180, 108240, 10000e18), hookData);
         vm.stopBroadcast();
     }
 

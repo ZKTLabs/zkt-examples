@@ -23,9 +23,32 @@ contract PoolSwapRouterTestScript is Script {
     address constant HOOK_ADDRESS = address(0x02065706eD6Ce5bff1537D67bb7995131aE9ef4a);
     address constant POOL_SWAP = address(0x92d3117268Bd580a748acbEE73162834443a3A17);
 
-    PoolSwapTest router = PoolSwapTest(address(POOL_SWAP));
+    PoolSwapTest router;
 
-    function setUp() public {}
+    function setUp() public {
+        router = new PoolSwapTest(IPoolManager(POOL_MANAGER));
+        initialize();
+    }
+
+    function initialize() internal view {
+        /// sort token and ready to create_pool
+        address token0 = uint160(TOKENA) < uint160(TOKENB) ? TOKENA : TOKENB;
+        address token1 = uint160(TOKENA) < uint160(TOKENB) ? TOKENB : TOKENA;
+
+        int24 tickSpacing = 60;
+        /// floor(sqrt(1) * 2 ^ 96)  == 1
+
+        PoolKey memory pool = PoolKey({
+            currency0: Currency.wrap(token0),
+            currency1: Currency.wrap(token1),
+            fee: 3000,
+            tickSpacing: tickSpacing,
+            hooks: IHooks(HOOK_ADDRESS)
+        });
+
+        console.logBytes32(PoolId.unwrap(pool.toId()));
+        console.logAddress(address(router));
+    }
 
     function run() public {
         /// sort token and ready to create_pool
